@@ -1,0 +1,14 @@
+<!-- 만약 questions가 있다면 -->
+{% if questions %}
+<ul>
+    {% for question in questions %}
+        <!-- href="/polls/{{question.id}}"와 똑같지만, 더욱 간편함. -->
+        <!-- polls 앱의 detail이라는 name을 가진 url을 입력하고 -->
+        <!-- 이때, detail에 question.id를 인자로 넘겨준다. -->
+        <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+    {% endfor %}
+</ul>
+<!-- questions가 없다면 -->
+{% else %}
+<p>no question</p>
+{% endif %}
