@@ -1,0 +1,7 @@
+<h2>회원가입<h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- views.py의 form_class를 그대로 받아옴. -->
+    {{ form.as_p }}
+    <button type="submit">가입하기</submit>
+</form>

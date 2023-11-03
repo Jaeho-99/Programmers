@@ -3,6 +3,12 @@ from .models import *
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.db.models import F
+# generic 뷰 모델 임포트
+from django.views import generic
+# url을 생성하는 revese_lazy 메서드 임포트
+from django.urls import reverse_lazy
+# 유저생성폼 임포트
+from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
 	latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -28,3 +34,9 @@ def vote(request, question_id):
 def result(request, question_id):
     question = get_object_or_404(Question, id=question_id)
     return render(request, 'polls/result.html', {'question' : question})
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    # 해당 경로의 이름으로 url을 가져옴.
+    success_url = reverse_lazy('user-list')
+    template_name = 'registration/signup.html'
